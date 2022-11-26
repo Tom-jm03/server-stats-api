@@ -1,0 +1,23 @@
+version: '2.8'
+
+
+services:
+ docker-python:
+  restart: unless-stopped
+  image: tom/python-docker:latest
+  ports:
+    - 3001:5000
+  networks:
+    - traefik-proxy
+  labels:
+    - "traefik.docker.network=traefik-proxy"
+    - "traefik.enable=true"
+    - "traefik.http.routers.pythonapi.rule=Host(`api.soosenbinder.de`)"
+    - "traefik.http.routers.pythonapi.entrypoints=https"
+    - "traefik.http.routers.pythonapi.tls=true"
+    - "traefik.http.routers.pythonapi.tls.certResolver=myresolver"
+    - "traefik.http.routers.pythonapi.service=pythonapi"
+    - "traefik.http.services.pythonapi.loadbalancer.server.port=5000"
+networks:
+  traefik-proxy:
+    external: true

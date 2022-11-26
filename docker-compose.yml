@@ -4,7 +4,7 @@ version: '2.8'
 services:
  docker-python:
   restart: unless-stopped
-  image: tom/python-docker:latest
+  image: tom/server-stats-api:latest
   ports:
     - 3001:5000
   networks:

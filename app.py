@@ -1,6 +1,5 @@
 from flask import Flask, jsonify
-import psutil
-from psutil._common import bytes2human
+import psutil, time
 
 
 app = Flask(__name__)
@@ -12,7 +11,7 @@ def get_system_info():
     cpu_temp  = psutil.sensors_temperatures(fahrenheit=False)
     load_avg = psutil.getloadavg()
     print(ram, cpu_temp, load_avg)
-    return jsonify(psutil.sensors_temperatures(fahrenheit=False), psutil.getloadavg(), psutil.virtual_memory(), psutil.disk_usage('/'))
+    return jsonify(psutil.sensors_temperatures(fahrenheit=False), psutil.getloadavg(), psutil.virtual_memory(), psutil.disk_usage('/'), time.time())
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=int("5000"))

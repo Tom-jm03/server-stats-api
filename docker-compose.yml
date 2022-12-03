@@ -15,6 +15,8 @@ services:
     - "traefik.http.routers.pythonapi.rule=Host(`api.soosenbinder.de`)"
     - "traefik.http.routers.pythonapi.entrypoints=https"
     - "traefik.http.routers.pythonapi.tls=true"
+    - "traefik.http.routers.pythonapi.middlewares=auth"
+    - "traefik.http.middlewares.auth.basicauth.users=admin:$$2y$$05$$2YEW.HW7E2VkXkqPC8w7yuvo0Rjcc.Qnc4QIbvHZ7wCAW2oS4YI/2"
     - "traefik.http.routers.pythonapi.tls.certResolver=myresolver"
     - "traefik.http.routers.pythonapi.service=pythonapi"
     - "traefik.http.services.pythonapi.loadbalancer.server.port=5000"
